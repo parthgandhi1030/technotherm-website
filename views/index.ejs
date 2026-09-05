@@ -528,8 +528,12 @@
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem; flex-grow: 1; line-height: 1.5;"><%= product.shortDesc %></p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-                  <a href="#contact" class="btn-primary" style="padding: 0.6rem; font-size: 0.825rem; text-align: center;">Inquire Quote</a>
-                  <a href="/admin/products/edit/<%= product.id %>" class="btn-secondary" style="padding: 0.6rem; font-size: 0.825rem; text-align: center;">✏️ Edit Product</a>
+                  <button type="button" onclick="openProductModal('<%= product.id %>')" class="btn-secondary" style="padding: 0.6rem; font-size: 0.825rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                    Tech Sheet <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
+                  </button>
+                  <a href="#contact" onclick="selectProductForInquiry('<%= product.title %>')" class="btn-primary" style="padding: 0.6rem; font-size: 0.825rem; text-align: center; display: flex; align-items: center; justify-content: center;">
+                    Inquire Quote
+                  </a>
                 </div>
               </div>
             </div>
@@ -789,60 +793,354 @@
     </section>
 
     <!-- Contact & RFQ Form -->
-    <section id="contact" class="section" style="background: #0b101d;">
+    <section id="contact" class="section" style="background: #090d16;">
       <div class="container">
+        
+        <!-- Header -->
         <div class="section-title-wrapper">
           <div class="badge-tag">
-            <i data-lucide="mail" style="width: 16px; height: 16px;"></i> Technical Assistance
+            <i data-lucide="mail" style="width: 16px; height: 16px;"></i> Fast Technical Assistance
           </div>
-          <h2 class="section-heading">Request a <span>Custom Technical Quote</span></h2>
-          <p class="section-subtext">Submit your technical specifications directly to our engineering panel.</p>
+          <h2 class="section-heading">
+            Request a <span>Custom Technical Quote</span>
+          </h2>
+          <p class="section-subtext">
+            Submit your technical specifications or contact our engineering panel directly for sizing recommendations and quotations.
+          </p>
         </div>
 
         <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem;" class="contact-grid">
-          <div class="card-glass" style="padding: 2.5rem; border: 1px solid var(--border-bright);">
-            <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 1.5rem;">Factory & Head Office</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;"><%= data.companyDetails.contact.address %></p>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem;"><strong>Phones:</strong> <%= data.companyDetails.contact.phones.join(' | ') %></p>
-            <p style="color: var(--primary-orange-light); font-size: 0.95rem;"><strong>Email:</strong> <%= data.companyDetails.contact.email %></p>
+          
+          <!-- Left Column: Address & Details Card -->
+          <div>
+            <div class="card-glass" style="padding: 2.5rem; height: 100%; background: linear-gradient(145deg, rgba(19,27,46,0.95) 0%, rgba(13,20,35,0.98) 100%); border: 1px solid var(--border-bright);">
+              <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 1.5rem;">
+                Contact Information
+              </h3>
+
+              <!-- Address -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(255,87,34,0.15); display: flex; align-items: center; justify-content: center; color: var(--primary-orange); flex-shrink: 0;">
+                  <i data-lucide="map-pin" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem;">Factory & Head Office</h4>
+                  <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                    <%= data.companyDetails.contact.address %>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Phone Numbers -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(59,130,246,0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); flex-shrink: 0;">
+                  <i data-lucide="phone" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem;">Phone & WhatsApp</h4>
+                  <% (data.companyDetails.contact.phones || []).forEach(p => { %>
+                    <a href="tel:<%= p %>" style="display: block; color: var(--text-main); font-size: 0.925rem; margin-bottom: 0.2rem;">
+                      <%= p %>
+                    </a>
+                  <% }); %>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16,185,129,0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-green); flex-shrink: 0;">
+                  <i data-lucide="mail" style="width: 22px; height: 22px;"></i>
+                </div>
+                <div>
+                  <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem;">Email Us</h4>
+                  <a href="mailto:<%= data.companyDetails.contact.email %>" style="color: var(--primary-orange-light); font-size: 0.925rem;">
+                    <%= data.companyDetails.contact.email %>
+                  </a>
+                  <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.2rem;">
+                    Web: teamthermotech.co.in
+                  </div>
+                </div>
+              </div>
+
+              <!-- Working Hours -->
+              <div style="display: flex; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                <i data-lucide="clock" style="width: 20px; height: 20px; color: var(--text-muted); flex-shrink: 0; margin-top: 2px;"></i>
+                <div style="font-size: 0.875rem; color: var(--text-muted);">
+                  <strong style="color: #fff;">Operational Hours:</strong><br />
+                  <%= data.companyDetails.contact.workingHours %>
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          <div class="card-glass" style="padding: 2.5rem;">
-            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 1.5rem;">Submit Technical Inquiry</h3>
-            <form onsubmit="handleContactSubmit(event)">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                <input type="text" id="contact_name" required placeholder="Full Name" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
-                <input type="text" id="contact_company" required placeholder="Company Name" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                <input type="email" id="contact_email" required placeholder="Work Email" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
-                <input type="tel" id="contact_phone" required placeholder="Phone / WhatsApp" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
-              </div>
-              <textarea id="contact_msg" rows="4" placeholder="Specification details..." style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px; margin-bottom: 1.5rem;"></textarea>
-              <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry RFQ →</button>
-            </form>
+          <!-- Right Column: Quote Request Form -->
+          <div>
+            <div class="card-glass" style="padding: 2.5rem;">
+              <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 1.5rem;">
+                Submit Inquiry Details
+              </h3>
+
+              <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;" class="form-row">
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                      Your Full Name *
+                    </label>
+                    <input 
+                      type="text" 
+                      id="contact_name" 
+                      required 
+                      placeholder="John Doe" 
+                      style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none;"
+                    >
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                      Company Name *
+                    </label>
+                    <input 
+                      type="text" 
+                      id="contact_company" 
+                      required 
+                      placeholder="Acme Industries" 
+                      style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none;"
+                    >
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;" class="form-row">
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                      Work Email *
+                    </label>
+                    <input 
+                      type="email" 
+                      id="contact_email" 
+                      required 
+                      placeholder="john@acme.com" 
+                      style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none;"
+                    >
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                      Phone / WhatsApp *
+                    </label>
+                    <input 
+                      type="tel" 
+                      id="contact_phone" 
+                      required 
+                      placeholder="+91 98765 43210" 
+                      style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none;"
+                    >
+                  </div>
+                </div>
+
+                <!-- Product Category Selector -->
+                <div style="margin-bottom: 1rem;">
+                  <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                    Product Interested In
+                  </label>
+                  <select 
+                    id="contact_product" 
+                    style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none;"
+                  >
+                    <% (data.productCategories || []).forEach(p => { %>
+                      <option value="<%= p.title %>"><%= p.title %></option>
+                    <% }); %>
+                  </select>
+                </div>
+
+                <!-- Technical Message / Specs -->
+                <div style="margin-bottom: 1.5rem;">
+                  <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; font-weight: 600;">
+                    Technical Requirements / Sizing Notes
+                  </label>
+                  <textarea 
+                    id="contact_msg" 
+                    rows="4" 
+                    placeholder="Specify pipe diameter, length, maintain temp, ambient min temp, or custom jacket requirements..." 
+                    style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; outline: none; resize: vertical;"
+                  ></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <button type="submit" class="btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <i data-lucide="send" style="width: 16px; height: 16px;"></i> Send Email RFQ
+                  </button>
+
+                  <button type="button" onclick="handleWhatsAppSend()" class="btn-secondary" style="color: #25D366 !important; border-color: rgba(37, 211, 102, 0.3); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <i data-lucide="message-square" style="width: 16px; height: 16px;"></i> WhatsApp RFQ
+                  </button>
+                </div>
+
+              </form>
+            </div>
           </div>
+
         </div>
+
       </div>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer style="background: #05080f; border-top: 1px solid var(--border-subtle); color: var(--text-muted); padding: 3rem 0; font-size: 0.875rem;">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        © <%= new Date().getFullYear() %> <%= data.companyDetails.name %>. All Rights Reserved. ISO 9001:2015 Registered.
+  <footer style="background: #05080f; border-top: 1px solid var(--border-subtle); color: var(--text-muted); padding-top: 4rem; padding-bottom: 2rem; font-size: 0.875rem;">
+    <div class="container">
+      
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3.5rem;" class="footer-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--primary-orange); display: flex; align-items: center; justify-content: center; color: #fff;">
+              <i data-lucide="flame" style="width: 22px; height: 22px;"></i>
+            </div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; color: #fff;">
+              Techno<span style="color: var(--primary-orange);">Therm</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            TechnoTherm Industries LLP is a proud group company of Thermo-Tech Industries (est. 1971). ISO 9001:2015 certified manufacturer of industrial heating cables, energy saving jackets, and thermal management systems.
+          </p>
+
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,87,34,0.1); padding: 0.4rem 0.85rem; border-radius: var(--radius-full); border: 1px solid rgba(255,87,34,0.25); font-size: 0.8rem; color: var(--primary-orange-light); font-weight: 600;">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> CSIR-CIMFR Zone II Approved
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 1.25rem;">Quick Navigation</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+            <li><a href="#hero" style="color: var(--text-muted);">Home</a></li>
+            <li><a href="#about" style="color: var(--text-muted);">About Company</a></li>
+            <li><a href="#products" style="color: var(--text-muted);">Product Line</a></li>
+            <li><a href="#calculator" style="color: var(--text-muted);">Thermal Loss Calculator</a></li>
+            <li><a href="#turnkey" style="color: var(--text-muted);">Turnkey Engineering</a></li>
+            <li><a href="#references" style="color: var(--text-muted);">Global References</a></li>
+            <li><a href="#contact" style="color: var(--text-muted);">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Key Products -->
+        <div>
+          <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 1.25rem;">Core Products</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+            <% (data.productCategories || []).slice(0, 6).forEach(p => { %>
+              <li><a href="#products" style="color: var(--text-muted);"><%= p.title %></a></li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <!-- Col 4: Address & Phone -->
+        <div>
+          <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 1.25rem;">Headquarters</h4>
+          <div style="font-size: 0.875rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.5rem;">
+              <i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--primary-orange); flex-shrink: 0; margin-top: 3px;"></i>
+              <span><%= data.companyDetails.contact.address %></span>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <i data-lucide="phone" style="width: 16px; height: 16px; color: var(--accent-blue); flex-shrink: 0; margin-top: 3px;"></i>
+              <span><%= (data.companyDetails.contact.phones || []).join(' | ') %></span>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <i data-lucide="mail" style="width: 16px; height: 16px; color: var(--accent-green); flex-shrink: 0; margin-top: 3px;"></i>
+              <span><%= data.companyDetails.contact.email %></span>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div>
-        <a href="/admin/login" style="color: var(--primary-orange-light); font-weight: 600;">🔒 Admin Panel Login</a>
+
+      <!-- Bottom Bar -->
+      <div style="padding-top: 2rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem;">
+        <div>
+          © <%= new Date().getFullYear() %> TechnoTherm Industries LLP. All Rights Reserved. ISO 9001:2015 Registered.
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <a href="/admin/login" style="color: var(--primary-orange-light); font-weight: 600; display: flex; align-items: center; gap: 0.35rem;">
+            <i data-lucide="lock" style="width: 14px; height: 14px;"></i> Admin Panel Login
+          </a>
+          <button type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.06); color: #fff; padding: 0.4rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.8rem;">
+            Back to Top <i data-lucide="arrow-up" style="width: 14px; height: 14px;"></i>
+          </button>
+        </div>
       </div>
+
     </div>
   </footer>
+
+  <!-- Product Specification Tech Sheet Modal -->
+  <div id="productModal" style="display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 1.5rem;">
+    <div class="card-glass animate-fade-in" style="width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; position: relative; padding: 2.5rem; background: #0d1322; border: 1px solid var(--border-bright); box-shadow: 0 25px 60px rgba(0,0,0,0.8);">
+      <button onclick="closeProductModal()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none;">
+        <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    const productsData = <%- JSON.stringify(data.productCategories || []) %>;
+
+    function openProductModal(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if (!product) return;
+      
+      const content = `
+        <div style="margin-bottom: 1.5rem;">
+          <span class="badge-tag"><i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> ${product.category}</span>
+          <h2 style="font-size: 1.8rem; color: #fff; margin-top: 0.5rem;">${product.title}</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;" class="modal-top-grid">
+          <div>
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; background: #000; margin-bottom: 0.75rem;">
+              <img src="${product.images[0]}" alt="${product.title}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+          </div>
+          <div>
+            <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem;">Product Overview</h4>
+            <p style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              ${product.fullDesc}
+            </p>
+            <h5 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem;">Key Technical Features</h5>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.35rem; color: #cbd5e1; font-size: 0.875rem;">
+              ${(product.features || []).map(f => `<li style="display: flex; align-items: center; gap: 0.4rem;"><i data-lucide="check" style="width: 14px; height: 14px; color: var(--primary-orange);"></i> ${f}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+          <button onclick="closeProductModal()" class="btn-secondary">Close</button>
+          <a href="#contact" onclick="closeProductModal(); selectProductForInquiry('${product.title}')" class="btn-primary">Request Sizing RFQ →</a>
+        </div>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('productModal').style.display = 'flex';
+      lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    function selectProductForInquiry(productTitle) {
+      const selectEl = document.getElementById('contact_product');
+      if (selectEl) {
+        selectEl.value = productTitle;
+      }
+    }
 
     async function runCalculation() {
       const payload = {
@@ -886,9 +1184,23 @@
       e.preventDefault();
       const name = document.getElementById('contact_name').value;
       const company = document.getElementById('contact_company').value;
-      const msg = document.getElementById('contact_msg').value;
-      
-      const text = encodeURIComponent(`*TechnoTherm Inquiry*\nName: ${name}\nCompany: ${company}\nMessage: ${msg}`);
+      const email = document.getElementById('contact_email').value;
+      const phone = document.getElementById('contact_phone').value;
+      const product = document.getElementById('contact_product').value;
+      const message = document.getElementById('contact_msg').value;
+
+      const subject = encodeURIComponent(`Inquiry for ${product} - ${company}`);
+      const body = encodeURIComponent(`Name: ${name}\nCompany: ${company}\nPhone: ${phone}\nEmail: ${email}\nProduct: ${product}\n\nDetails:\n${message}`);
+      window.location.href = `mailto:<%= data.companyDetails.contact.email %>?subject=${subject}&body=${body}`;
+    }
+
+    function handleWhatsAppSend() {
+      const name = document.getElementById('contact_name').value || 'N/A';
+      const company = document.getElementById('contact_company').value || 'N/A';
+      const product = document.getElementById('contact_product').value || 'Heating Cable';
+      const message = document.getElementById('contact_msg').value || '';
+
+      const text = encodeURIComponent(`*TechnoTherm Inquiry*\nName: ${name}\nCompany: ${company}\nProduct: ${product}\nNotes: ${message}`);
       window.open(`https://wa.me/<%= data.companyDetails.contact.whatsapp %>?text=${text}`, '_blank');
     }
   </script>
