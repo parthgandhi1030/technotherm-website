@@ -682,7 +682,7 @@
             <i data-lucide="calculator" style="width: 16px; height: 16px;"></i> Dynamic Formula Calculator
           </div>
           <h2 class="section-heading">Thermal Heat Loss <span>& Cable Sizing</span></h2>
-          <p class="section-subtext">Uses dynamic math parameters configured in your Admin Panel.</p>
+          <p class="section-subtext">Calculates exact thermal power required (W/m) and recommends the optimal heating cable specification.</p>
         </div>
 
         <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.95) 0%, rgba(13,20,35,0.98) 100%); border: 1px solid rgba(255,87,34,0.3);">
@@ -736,11 +736,11 @@
               <div id="res_qPerMeter" style="font-size: 3rem; font-weight: 800; color: var(--primary-orange-light); margin: 0.5rem 0; line-height: 1.1;">
                 28 <span style="font-size: 1.2rem; color: var(--text-muted);">W/m</span>
               </div>
-              <div id="res_recommendedCable" style="color: #fff; font-weight: 700; font-size: 0.95rem; margin-bottom: 1.5rem;">
+              <div id="res_recommendedCable" style="color: #fff; font-weight: 700; font-size: 0.95rem; margin-bottom: 1.25rem;">
                 SLSR-35 (Self-Regulating 35W/m)
               </div>
-              <a href="/admin/calculator-settings" style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem;">
-                ⚙️ Adjust Formula & Safety Factor in Admin Panel
+              <a href="#contact" onclick="selectProductForInquiry('Heat Loss Sizing Calculation')" class="btn-primary" style="padding: 0.65rem 1.25rem; font-size: 0.85rem; width: 100%; display: inline-flex; justify-content: center; align-items: center; gap: 0.4rem;">
+                Request Sizing Quote →
               </a>
             </div>
           </form>
