@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator Formula Settings | TechnoTherm Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+<body style="background: #090d16; color: #fff;">
+
+  <div style="background: #0d1322; border-bottom: 1px solid var(--border-subtle); padding: 1rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-weight: 800; font-size: 1.2rem;">Thermal Calculator <span style="color: var(--accent-blue);">Formula Settings</span></div>
+      <div>
+        <a href="/admin/dashboard" style="color: var(--text-muted); font-size: 0.9rem; margin-right: 1rem;">← Dashboard</a>
+        <a href="/admin/logout" style="color: #f87171; font-size: 0.9rem;">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding: 2.5rem 0;">
+    
+    <div class="card-glass" style="padding: 2.5rem; max-width: 840px; margin: 0 auto; border: 1px solid var(--border-bright);">
+      
+      <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">Configure Math & Formula Parameters</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Tweak multipliers, safety margins, and thermal conductivity values to tune the live heat loss output ($W/m$) displayed on the homepage calculator.
+        </p>
+      </div>
+
+      <% if (typeof success !== 'undefined' && success) { %>
+        <div style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #34d399; padding: 0.75rem; border-radius: 6px; font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">
+          <%= success %>
+        </div>
+      <% } %>
+
+      <!-- Mathematical Formula Display -->
+      <div style="background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3); padding: 1.25rem; border-radius: 8px; margin-bottom: 2rem;">
+        <div style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem;">Active Mathematical Formula:</div>
+        <div style="font-family: monospace; color: #fff; font-size: 1.05rem; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px; text-align: center;">
+          Q (W/m) = [ (2 × π × k × ΔT) / ln(D_outer / D_inner) ] × <span style="color: var(--primary-orange-light);">SafetyFactor</span> × <span style="color: var(--accent-green);">FormulaMultiplier</span>
+        </div>
+      </div>
+
+      <form action="/admin/calculator-settings" method="POST">
+        
+        <!-- Multipliers Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+          
+          <div>
+            <label style="display: block; color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              Safety Factor Multiplier
+            </label>
+            <input 
+              type="number" 
+              step="0.01" 
+              name="safetyFactor" 
+              value="<%= settings.safetyFactor || 1.25 %>" 
+              required
+              style="width: 100%; padding: 0.75rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">
+              Default: 1.25 (Adds 25% safety margin to calculated W/m).
+            </div>
+          </div>
+
+          <div>
+            <label style="display: block; color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              Formula Calibration Multiplier
+            </label>
+            <input 
+              type="number" 
+              step="0.01" 
+              name="formulaMultiplier" 
+              value="<%= settings.formulaMultiplier || 1.0 %>" 
+              required
+              style="width: 100%; padding: 0.75rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">
+              Default: 1.0 (Increase/decrease to globally scale output heat loss).
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Thermal Conductivity K-Values -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 1rem;">Thermal Conductivity Values (k in W/m·K)</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem;">
+          
+          <div>
+            <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Glass Wool (k)</label>
+            <input 
+              type="number" 
+              step="0.001" 
+              name="k_glasswool" 
+              value="<%= (settings.kValues && settings.kValues.glasswool) || 0.038 %>" 
+              style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+          </div>
+
+          <div>
+            <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Rockwool / Mineral Wool (k)</label>
+            <input 
+              type="number" 
+              step="0.001" 
+              name="k_rockwool" 
+              value="<%= (settings.kValues && settings.kValues.rockwool) || 0.042 %>" 
+              style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+          </div>
+
+          <div>
+            <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Polyurethane Foam (k)</label>
+            <input 
+              type="number" 
+              step="0.001" 
+              name="k_polyurethane" 
+              value="<%= (settings.kValues && settings.kValues.polyurethane) || 0.024 %>" 
+              style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+          </div>
+
+          <div>
+            <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">Calcium Silicate (k)</label>
+            <input 
+              type="number" 
+              step="0.001" 
+              name="k_calcium_silicate" 
+              value="<%= (settings.kValues && settings.kValues.calcium_silicate) || 0.055 %>" 
+              style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;"
+            >
+          </div>
+
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+          <a href="/admin/dashboard" class="btn-secondary">Cancel</a>
+          <button type="submit" class="btn-primary">💾 Save Formula Parameters</button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

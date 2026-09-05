@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | TechnoTherm Industries LLP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+<body style="background: #090d16; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+
+  <div class="card-glass" style="width: 100%; max-width: 420px; padding: 2.5rem; border: 1px solid var(--border-bright); boxShadow: 0 20px 50px rgba(0,0,0,0.8);">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--primary-orange); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem auto;">🔒</div>
+      <h2 style="color: #fff; font-size: 1.6rem; font-weight: 800;">TechnoTherm Admin</h2>
+      <p style="color: var(--text-muted); font-size: 0.875rem;">Enter Admin ID & Password to access dashboard</p>
+    </div>
+
+    <% if (error) { %>
+      <div style="background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); color: #f87171; padding: 0.75rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1.25rem; text-align: center;">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form action="/admin/login" method="POST">
+      <div style="margin-bottom: 1.25rem;">
+        <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Admin ID / Username</label>
+        <input 
+          type="text" 
+          name="username" 
+          required 
+          placeholder="admin" 
+          style="width: 100%; padding: 0.75rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px; outline: none;"
+        >
+      </div>
+
+      <div style="margin-bottom: 1.75rem;">
+        <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Password</label>
+        <input 
+          type="password" 
+          name="password" 
+          required 
+          placeholder="••••••••" 
+          style="width: 100%; padding: 0.75rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px; outline: none;"
+        >
+      </div>
+
+      <button type="submit" class="btn-primary" style="width: 100%; padding: 0.8rem;">
+        Login to Dashboard →
+      </button>
+    </form>
+
+    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-dim);">
+      Default Credentials: <strong>admin</strong> / <strong>admin123</strong>
+    </div>
+
+  </div>
+
+</body>
+</html>

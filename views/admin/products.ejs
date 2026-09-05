@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Manager | TechnoTherm Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/index.css">
+  <style>
+    .img-thumb {
+      width: 60px;
+      height: 45px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body style="background: #090d16; color: #fff;">
+
+  <div style="background: #0d1322; border-bottom: 1px solid var(--border-subtle); padding: 1rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-weight: 800; font-size: 1.2rem;">TechnoTherm <span style="color: var(--primary-orange-light);">Product Manager</span></div>
+      <div>
+        <a href="/admin/dashboard" style="color: var(--text-muted); font-size: 0.9rem; margin-right: 1rem;">← Dashboard</a>
+        <a href="/admin/logout" style="color: #f87171; font-size: 0.9rem;">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding: 2.5rem 0;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <div>
+        <h1 style="font-size: 1.8rem; font-weight: 800;">Manage All Products & Images</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Click "Edit Product & Upload Image" on any item to update details.</p>
+      </div>
+    </div>
+
+    <div class="card-glass" style="overflow: hidden;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border-subtle); color: var(--primary-orange-light);">
+            <th style="padding: 1rem 1.25rem;">Image</th>
+            <th style="padding: 1rem 1.25rem;">Product Title</th>
+            <th style="padding: 1rem 1.25rem;">Category</th>
+            <th style="padding: 1rem 1.25rem;">Badge Tag</th>
+            <th style="padding: 1rem 1.25rem; text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 0.85rem 1.25rem;">
+                <img src="<%= product.images[0] || '/assets/images/slsr_cable_1.jpg' %>" class="img-thumb" alt="<%= product.title %>">
+              </td>
+              <td style="padding: 0.85rem 1.25rem; font-weight: 700; color: #fff;">
+                <%= product.title %>
+              </td>
+              <td style="padding: 0.85rem 1.25rem; color: var(--text-muted);">
+                <%= product.category %>
+              </td>
+              <td style="padding: 0.85rem 1.25rem; color: var(--accent-blue); font-weight: 600;">
+                <%= product.badge %>
+              </td>
+              <td style="padding: 0.85rem 1.25rem; text-align: right;">
+                <a href="/admin/products/edit/<%= product.id %>" class="btn-primary" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+                  ✏️ Edit Product & Image
+                </a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+</html>

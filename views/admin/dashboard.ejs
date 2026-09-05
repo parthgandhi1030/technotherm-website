@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | TechnoTherm Industries LLP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+<body style="background: #090d16; color: #fff;">
+
+  <!-- Admin Header -->
+  <div style="background: #0d1322; border-bottom: 1px solid var(--border-subtle); padding: 1rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--primary-orange); display: flex; align-items: center; justify-content: center; font-weight: 800;">🔥</div>
+        <div>
+          <div style="font-weight: 800; font-size: 1.2rem;">TechnoTherm <span style="color: var(--primary-orange-light);">Admin Panel</span></div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">Manage Products, Images & Formula Settings</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <a href="/" target="_blank" style="color: var(--text-muted); font-size: 0.875rem;">🌐 View Live Website</a>
+        <a href="/admin/logout" class="btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem; border-color: rgba(239,68,68,0.4); color: #f87171;">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    
+    <div style="margin-bottom: 2.5rem;">
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Welcome to Master Control Dashboard</h1>
+      <p style="color: var(--text-muted);">Select a module below to modify website content, product specifications, images, or formula parameters.</p>
+    </div>
+
+    <!-- Management Modules Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
+      
+      <!-- Module 1: Product & Image Management -->
+      <div class="card-glass" style="padding: 2rem;">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">📦</div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Product & Image Manager</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Edit all 14 product categories, upload custom photographs (auto-fitted to cards), update specs tables, features & applications.
+        </p>
+        <a href="/admin/products" class="btn-primary" style="width: 100%; text-align: center;">Manage Products →</a>
+      </div>
+
+      <!-- Module 2: Calculator Formula Settings -->
+      <div class="card-glass" style="padding: 2rem; border-color: rgba(59,130,246,0.4);">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">🧮</div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Formula & Math Parameters</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Adjust heat loss calculation formula settings: Safety Factor multiplier, formula calibration multiplier, thermal conductivity values & thresholds.
+        </p>
+        <a href="/admin/calculator-settings" class="btn-primary" style="width: 100%; text-align: center; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">Edit Formula Settings →</a>
+      </div>
+
+      <!-- Module 3: Company & Chairman Info -->
+      <div class="card-glass" style="padding: 2rem; border-color: rgba(16,185,129,0.4);">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">🏛️</div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Company Info & Chairman Message</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Update Chairman Ramesh Gandhi's quote/message, corporate vision, mission, factory address, email & phone numbers.
+        </p>
+        <a href="/admin/company-info" class="btn-primary" style="width: 100%; text-align: center; background: linear-gradient(135deg, #10b981 0%, #047857 100%);">Edit Company Info →</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

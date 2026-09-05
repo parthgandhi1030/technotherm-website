@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= data.companyDetails.name %> | Industrial Heating Cable & Thermal Solutions</title>
+  
+  <meta name="description" content="Leading manufacturer of Self-Regulating Heating Cables (SLSR), Constant Wattage Cable (CWSR), Energy Saving Insulation Jackets, Cold Storage Door Heaters & Turnkey Thermal Projects. ISO 9001:2015 Certified & CIMFR Approved.">
+  <meta name="keywords" content="TechnoTherm Industries LLP, Self Regulating Heating Cable, SLSR Cable, Constant Wattage Heating Cable, CWSR Cable, Energy Saving Insulation Jacket, Silicone Rubber Drain Pipe Heater, Hopper Heating Pads, Industrial Drum Heaters, Turnkey Heat Tracing India">
+  <link rel="canonical" href="https://teamthermotech.co.in/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Complete Design System & High-Contrast CSS Rules */
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1b2640;
+      --bg-glass: rgba(19, 27, 46, 0.85);
+      
+      --primary-orange: #ff5722;
+      --primary-orange-light: #ff784b;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-bright: rgba(255, 87, 34, 0.4);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+      --shadow-orange: 0 8px 24px rgba(255, 87, 34, 0.25);
+      
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Reset Link Contrast & Prevent Purple/Blue Visited Browser Defaults */
+    a, a:link, a:visited {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover, a:focus {
+      color: var(--primary-orange-light);
+      text-decoration: none;
+    }
+
+    /* Force Pristine High Contrast for All Buttons Across All States */
+    .btn-primary, .btn-primary:link, .btn-primary:visited {
+      color: #ffffff !important;
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+      color: #ffffff !important;
+    }
+
+    .btn-secondary, .btn-secondary:link, .btn-secondary:visited {
+      color: #ffffff !important;
+    }
+
+    .btn-secondary:hover, .btn-secondary:focus {
+      color: #ffffff !important;
+    }
+
+    .btn-outline-orange, .btn-outline-orange:link, .btn-outline-orange:visited {
+      color: var(--primary-orange-light) !important;
+    }
+
+    .btn-outline-orange:hover, .btn-outline-orange:focus {
+      color: #ffffff !important;
+      background: var(--primary-orange);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    button {
+      font-family: var(--font-heading);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .section-title-wrapper {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 3.5rem auto;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.825rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(255, 87, 34, 0.15);
+      color: var(--primary-orange-light);
+      border: 1px solid rgba(255, 87, 34, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading span {
+      background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9800 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtext {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    /* Glassmorphic Cards */
+    .card-glass {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .card-glass:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-orange);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, var(--primary-orange) 0%, #e64a19 100%);
+      color: #ffffff !important;
+      padding: 0.85rem 1.8rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(255, 87, 34, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ff7043 0%, var(--primary-orange) 100%);
+      box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff !important;
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem 1.8rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-orange {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--primary-orange);
+      color: var(--primary-orange-light) !important;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .btn-outline-orange:hover {
+      background: var(--primary-orange);
+      color: #fff !important;
+    }
+
+    /* Aspect ratio image frame normalization */
+    .img-auto-fit {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s ease;
+    }
+    .img-auto-fit:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid, .about-cards-grid, .products-grid, .calc-grid, .roi-grid, .explorer-grid, .turnkey-grid, .industries-grid, .contact-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .desktop-nav {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+    <!-- Top Announcement Bar -->
+    <div style="background: #070a12; border-bottom: 1px solid var(--border-subtle); padding: 0.4rem 0; font-size: 0.85rem; color: var(--text-muted);">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;">
+          <span style="display: flex; align-items: center; gap: 0.35rem; color: var(--text-muted);">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--primary-orange);"></i> ISO 9001:2015 & CSIR-CIMFR Certified
+          </span>
+          <span style="display: flex; align-items: center; gap: 0.35rem; color: var(--text-muted);">
+            <i data-lucide="map-pin" style="width: 14px; height: 14px; color: var(--accent-blue);"></i> Vasai (E), Palghar, Maharashtra (India)
+          </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1.2rem;">
+          <a href="tel:<%= data.companyDetails.contact.phones[0] %>" style="display: flex; align-items: center; gap: 0.35rem; color: #ffffff;">
+            <i data-lucide="phone" style="width: 14px; height: 14px; color: var(--primary-orange);"></i> <%= data.companyDetails.contact.phones[0] %>
+          </a>
+          <a href="mailto:<%= data.companyDetails.contact.email %>" style="display: flex; align-items: center; gap: 0.35rem; color: var(--primary-orange-light);">
+            <i data-lucide="mail" style="width: 14px; height: 14px; color: var(--accent-blue);"></i> <%= data.companyDetails.contact.email %>
+          </a>
+          <a href="/admin/login" style="color: var(--accent-blue); font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+            <i data-lucide="lock" style="width: 14px; height: 14px;"></i> Admin Panel
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav style="background: rgba(9, 13, 22, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); padding: 0.9rem 0;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="#hero" style="display: flex; align-items: center; gap: 0.75rem; color: #ffffff;">
+          <div style="width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, var(--primary-orange) 0%, #d84315 100%); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);">
+            <i data-lucide="flame" style="width: 26px; height: 26px;"></i>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem; color: #ffffff; line-height: 1;">
+              Techno<span style="color: var(--primary-orange);">Therm</span>
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase;">
+              Industries LLP • Est. 1971
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <div style="display: flex; align-items: center; gap: 1.3rem;" class="desktop-nav">
+          <a href="#hero" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Home</a>
+          <a href="#about" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">About Us</a>
+          <a href="#products" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Products</a>
+          <a href="#cable-explorer" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Cable Explorer</a>
+          <a href="#calculator" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Heat Calculator</a>
+          <a href="#roi-calculator" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">ROI Calculator</a>
+          <a href="#turnkey" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Turnkey</a>
+          <a href="#references" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">References</a>
+          <a href="#contact" style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">Contact</a>
+        </div>
+
+        <a href="#contact" class="btn-primary" style="padding: 0.65rem 1.25rem; font-size: 0.875rem;">
+          <i data-lucide="file-text" style="width: 16px; height: 16px;"></i> Request Quote
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main style="padding-top: 130px;">
+    
+    <!-- Hero Section -->
+    <section id="hero" style="padding: 90px 0; background: radial-gradient(circle at 70% 30%, rgba(255, 87, 34, 0.15) 0%, rgba(9, 13, 22, 1) 70%);">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center;" class="hero-grid">
+          <div>
+            <div class="badge-tag">
+              <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i> ISO 9001:2015 & CSIR-CIMFR Certified
+            </div>
+
+            <h1 style="font-size: 3.2rem; font-weight: 800; color: #ffffff; line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.03em;">
+              Precision Industrial <br>
+              <span style="background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Electric Heating Cables
+              </span> & Thermal Systems
+            </h1>
+
+            <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 620px; line-height: 1.6;">
+              Over 53 years of engineering trust since 1971. Manufacturing Self-Regulating (SLSR) & Constant Wattage (CWSR) Heating Cables, Power Saving Insulation Jackets, Cold Storage Door Heaters, Hopper Pads, and Turnkey Solutions.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px; color: var(--primary-orange);"></i> 20%-45% Energy Saving Jackets
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px; color: var(--primary-orange);"></i> Zone II Ex Area CIMFR Certified
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px; color: var(--primary-orange);"></i> Custom Lengths & Sizing Support
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px; color: var(--primary-orange);"></i> Exports to 12+ Nations Worldwide
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="#products" class="btn-primary">
+                Explore Product Line <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+              </a>
+              <a href="#calculator" class="btn-secondary">
+                <i data-lucide="calculator" style="width: 18px; height: 18px; color: var(--primary-orange);"></i> Calculate Cable Heat Loss
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Graphic Card -->
+          <div>
+            <div class="card-glass" style="padding: 2rem; border: 1px solid rgba(255,87,34,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+              <div style="position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; height: 260px; background: #000;">
+                <img src="/assets/images/slsr_cable_1.jpg" alt="TechnoTherm Heating Cables" class="img-auto-fit" style="height: 100%;">
+                <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,13,22,0.95) 0%, transparent 60%); display: flex; align-items: flex-end; padding: 1.25rem;">
+                  <div>
+                    <span class="badge-tag" style="background: var(--primary-orange); color: #fff; border: none;">
+                      THERMO-FLEX® SLSR Series
+                    </span>
+                    <h3 style="color: #fff; font-size: 1.25rem; margin-top: 0.25rem;">
+                      Self-Regulating Electric Heat Tracer
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px;">
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-dim);">Temperature Range</div>
+                  <div style="font-weight: 700; color: #fff; font-size: 1rem;">-60°C to +220°C</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-dim);">Wattage Ratings</div>
+                  <div style="font-weight: 700; color: var(--primary-orange-light); font-size: 1rem;">10W - 60W / meter</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-dim);">Hazardous Rating</div>
+                  <div style="font-weight: 700; color: #fff; font-size: 1rem;">Zone II (T1 to T5)</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-dim);">Certifications</div>
+                  <div style="font-weight: 700; color: var(--accent-green); font-size: 1rem;">CIMFR / ISO 9001</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Stats Bar -->
+        <div style="margin-top: 4.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; background: rgba(19, 27, 46, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2rem; backdrop-filter: blur(10px);">
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--primary-orange-light); line-height: 1;">53+</div>
+            <div style="font-weight: 600; color: #fff; margin-top: 0.35rem;">Years Group Legacy</div>
+            <div style="font-size: 0.825rem; color: var(--text-dim);">Est. 1971</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--primary-orange-light); line-height: 1;">5,000+</div>
+            <div style="font-weight: 600; color: #fff; margin-top: 0.35rem;">Projects Completed</div>
+            <div style="font-size: 0.825rem; color: var(--text-dim);">Worldwide</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--primary-orange-light); line-height: 1;">15+</div>
+            <div style="font-weight: 600; color: #fff; margin-top: 0.35rem;">Product Lines</div>
+            <div style="font-size: 0.825rem; color: var(--text-dim);">Custom & Standard</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--primary-orange-light); line-height: 1;">12+</div>
+            <div style="font-weight: 600; color: #fff; margin-top: 0.35rem;">Export Destinations</div>
+            <div style="font-size: 0.825rem; color: var(--text-dim);">Global Footprint</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section" style="background: #0b101d;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="award" style="width: 16px; height: 16px;"></i> Over 5 Decades of Engineering Trust
+          </div>
+          <h2 class="section-heading">About <span><%= data.companyDetails.name %></span></h2>
+          <p class="section-subtext">A proud group company of Thermo-Tech Industries with a continuous legacy of quality, innovation, and reliability in thermal management solutions since 1971.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-bottom: 4rem;" class="about-cards-grid">
+          <div class="card-glass" style="padding: 2rem;">
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.75rem;">Our Vision</h3>
+            <p style="color: var(--text-muted); font-size: 0.975rem; line-height: 1.6;"><%= data.companyDetails.vision %></p>
+          </div>
+          <div class="card-glass" style="padding: 2rem;">
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.75rem;">Our Mission</h3>
+            <p style="color: var(--text-muted); font-size: 0.975rem; line-height: 1.6;"><%= data.companyDetails.mission %></p>
+          </div>
+          <div class="card-glass" style="padding: 2rem;">
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.75rem;">Our Core Value</h3>
+            <p style="color: var(--text-muted); font-size: 0.975rem; line-height: 1.6;"><%= data.companyDetails.coreValue %></p>
+          </div>
+        </div>
+
+        <!-- Chairman Message -->
+        <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.9) 0%, rgba(13,20,35,0.95) 100%); border: 1px solid rgba(255,87,34,0.3);">
+          <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;">
+            <div style="text-align: center;">
+              <div style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9800 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2.2rem; font-weight: 800; margin: 0 auto 1rem auto; box-shadow: 0 8px 24px rgba(255,87,34,0.4);">
+                RG
+              </div>
+              <h4 style="color: #fff; font-size: 1.2rem; margin: 0;"><%= data.companyDetails.chairman.name %></h4>
+              <div style="color: var(--primary-orange-light); font-size: 0.875rem; font-weight: 600;"><%= data.companyDetails.chairman.title %></div>
+            </div>
+
+            <div>
+              <div style="color: var(--primary-orange); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 0.75rem;">Chairman's Address</div>
+              <blockquote style="font-size: 1.1rem; font-style: italic; color: #f1f5f9; line-height: 1.6; margin-bottom: 1.25rem;">
+                "<%= data.companyDetails.chairman.quote %>"
+              </blockquote>
+              <div style="color: var(--text-muted); white-space: pre-line; line-height: 1.7; font-size: 0.975rem;">
+                <%= data.companyDetails.chairman.message %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="products" class="section" style="background: #090d16;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="flame" style="width: 16px; height: 16px;"></i> Complete Thermal Product Portfolio
+          </div>
+          <h2 class="section-heading">Our <span>Industrial Heating Solutions</span></h2>
+          <p class="section-subtext">Engineered for high thermal efficiency, extreme durability, and maximum safety compliance in demanding industrial environments.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;" class="products-grid">
+          <% (data.productCategories || []).forEach(product => { %>
+            <div class="card-glass" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
+              <!-- Frame normalization: images of any resolution/size automatically crop and fit cleanly -->
+              <div style="position: relative; height: 220px; background: #000; overflow: hidden;">
+                <img src="<%= product.images[0] || '/assets/images/slsr_cable_1.jpg' %>" alt="<%= product.title %>" class="img-auto-fit">
+                <div style="position: absolute; top: 12px; left: 12px; background: rgba(9, 13, 22, 0.85); backdrop-filter: blur(4px); padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; color: var(--primary-orange-light); border: 1px solid rgba(255,87,34,0.3);">
+                  <%= product.badge || product.category %>
+                </div>
+              </div>
+
+              <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600;"><%= product.category %></div>
+                <h3 style="color: #fff; font-size: 1.2rem; margin: 0.4rem 0 0.75rem 0; line-height: 1.3;"><%= product.title %></h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem; flex-grow: 1; line-height: 1.5;"><%= product.shortDesc %></p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                  <a href="#contact" class="btn-primary" style="padding: 0.6rem; font-size: 0.825rem; text-align: center;">Inquire Quote</a>
+                  <a href="/admin/products/edit/<%= product.id %>" class="btn-secondary" style="padding: 0.6rem; font-size: 0.825rem; text-align: center;">✏️ Edit Product</a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cable Explorer Section -->
+    <section id="cable-explorer" class="section" style="background: #080c16;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="layers" style="width: 16px; height: 16px;"></i> Interactive Engineering Visualizer
+          </div>
+          <h2 class="section-heading">Interactive Cable <span>Structure Explorer</span></h2>
+          <p class="section-subtext">Inspect the internal construction layers of TechnoTherm electric heating cables.</p>
+        </div>
+
+        <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.98) 0%, rgba(10,15,26,0.99) 100%); border: 1px solid var(--border-bright);">
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center;" class="explorer-grid">
+            <div>
+              <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 1.5rem;">SLSR Self-Regulating Cable Cutaway Construction</h3>
+              
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="padding: 1rem; background: rgba(255,87,34,0.15); border: 1px solid var(--primary-orange); border-radius: 8px; color: #fff;">
+                  <strong>1. Dual Tinned Copper Bus Wires (7 × 0.4mm)</strong>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Continuous electrical power distribution along circuit length.</div>
+                </div>
+
+                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
+                  <strong>2. PTC Semi-Conductive Polymer Core</strong>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Automatically adjusts resistance & heat output relative to surface temperature.</div>
+                </div>
+
+                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
+                  <strong>3. Primary Insulation (Polyolefin / PTFE)</strong>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">High dielectric barrier protecting against electrical breakdown up to 230V AC.</div>
+                </div>
+
+                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
+                  <strong>4. Al-Mg Metallic Braid Shield</strong>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">100% ground fault safety and high mechanical strength per IEEE/IS standards.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(9,13,22,0.85); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+              <div style="color: var(--accent-blue); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Engineering Quality</div>
+              <h3 style="color: #fff; font-size: 1.4rem; margin: 0.5rem 0 1rem 0;">CSIR-CIMFR Zone II Approved</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                Our heat tracing cables undergo 100% high-voltage dielectric testing and insulation resistance validation prior to dispatch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Heat Calculator Section -->
+    <section id="calculator" class="section" style="background: #0b101d;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="calculator" style="width: 16px; height: 16px;"></i> Dynamic Formula Calculator
+          </div>
+          <h2 class="section-heading">Thermal Heat Loss <span>& Cable Sizing</span></h2>
+          <p class="section-subtext">Uses dynamic math parameters configured in your Admin Panel.</p>
+        </div>
+
+        <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.95) 0%, rgba(13,20,35,0.98) 100%); border: 1px solid rgba(255,87,34,0.3);">
+          <form id="heatCalcForm" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center;" class="calc-grid">
+            <div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Nominal Pipe Diameter (NPS)</label>
+                  <select id="calc_pipeDiameter" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                    <option value="0.5">0.5 Inch (21.3 mm OD)</option>
+                    <option value="1">1.0 Inch (33.4 mm OD)</option>
+                    <option value="1.5">1.5 Inch (48.3 mm OD)</option>
+                    <option value="2" selected>2.0 Inch (60.3 mm OD)</option>
+                    <option value="3">3.0 Inch (88.9 mm OD)</option>
+                    <option value="4">4.0 Inch (114.3 mm OD)</option>
+                    <option value="6">6.0 Inch (168.3 mm OD)</option>
+                    <option value="8">8.0 Inch (219.1 mm OD)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Insulation Thickness (mm)</label>
+                  <select id="calc_insulationThickness" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                    <option value="25">25 mm Insulation</option>
+                    <option value="38">38 mm Insulation</option>
+                    <option value="50" selected>50 mm Insulation</option>
+                    <option value="75">75 mm Insulation</option>
+                    <option value="100">100 mm Insulation</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Maintain Temperature (°C)</label>
+                  <input type="number" id="calc_maintainTemp" value="50" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Min Ambient Temp (°C)</label>
+                  <input type="number" id="calc_ambientTemp" value="0" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+              </div>
+
+              <button type="button" onclick="runCalculation()" class="btn-primary" style="width: 100%; padding: 0.75rem;">
+                Calculate Heat Loss (W/m)
+              </button>
+            </div>
+
+            <!-- Output Display Box -->
+            <div style="background: rgba(9,13,22,0.95); border: 1px solid var(--border-bright); padding: 2rem; border-radius: 14px; text-align: center; box-shadow: 0 10px 30px rgba(255,87,34,0.15);">
+              <div style="font-size: 0.825rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Calculated Heat Loss</div>
+              <div id="res_qPerMeter" style="font-size: 3rem; font-weight: 800; color: var(--primary-orange-light); margin: 0.5rem 0; line-height: 1.1;">
+                28 <span style="font-size: 1.2rem; color: var(--text-muted);">W/m</span>
+              </div>
+              <div id="res_recommendedCable" style="color: #fff; font-weight: 700; font-size: 0.95rem; margin-bottom: 1.5rem;">
+                SLSR-35 (Self-Regulating 35W/m)
+              </div>
+              <a href="/admin/calculator-settings" style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem;">
+                ⚙️ Adjust Formula & Safety Factor in Admin Panel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Energy ROI Calculator Section -->
+    <section id="roi-calculator" class="section" style="background: #090d16;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="cpu" style="width: 16px; height: 16px;"></i> Financial ROI & Carbon Calculator
+          </div>
+          <h2 class="section-heading">Plastic Machinery <span>Energy Savings Calculator</span></h2>
+          <p class="section-subtext">Calculate your plant's exact monthly electricity savings with TechnoTherm Insulation Jackets.</p>
+        </div>
+
+        <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(13,20,35,0.98) 100%); border: 1px solid rgba(16,185,129,0.3);">
+          <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;" class="roi-grid">
+            <div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Number of Machines</label>
+                  <input type="number" id="roi_machines" value="5" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Barrel Heating (kW/Machine)</label>
+                  <input type="number" id="roi_kw" value="30" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Running Hours / Day</label>
+                  <input type="number" id="roi_hrs" value="20" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+                <div>
+                  <label style="display: block; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">Electricity Tariff (₹ / kWh)</label>
+                  <input type="number" id="roi_tariff" value="10" style="width: 100%; padding: 0.65rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                </div>
+              </div>
+              <button type="button" onclick="runRoiCalc()" class="btn-primary" style="width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                Calculate Financial Savings & ROI
+              </button>
+            </div>
+
+            <div style="background: rgba(9,13,22,0.9); border: 1px solid rgba(16,185,129,0.4); padding: 2rem; border-radius: 14px; text-align: center;">
+              <div style="font-size: 0.825rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Estimated Annual Cost Savings</div>
+              <div id="res_roiSavings" style="font-size: 2.75rem; font-weight: 800; color: var(--accent-green); margin: 0.5rem 0; line-height: 1.1;">
+                ₹7,66,500
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;">
+                <div style="background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Monthly kWh Saved</div>
+                  <div id="res_roiKwh" style="font-weight: 700; color: #fff;">63,875 kWh</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Payback Period</div>
+                  <div id="res_roiMonths" style="font-weight: 700; color: var(--primary-orange-light);">5.2 Months</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Turnkey Process Section -->
+    <section id="turnkey" class="section" style="background: #0b101d;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="layers" style="width: 16px; height: 16px;"></i> End-to-End Execution
+          </div>
+          <h2 class="section-heading">Turnkey Project <span>Methodology</span></h2>
+          <p class="section-subtext">From initial site survey to system installation, commissioning, and long-term AMCs.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;" class="turnkey-grid">
+          <div class="card-glass" style="padding: 2rem;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: rgba(255, 87, 34, 0.4); line-height: 1; margin-bottom: 0.75rem;">01</div>
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 0.6rem;">Requirement & Site Survey</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Reviewing pipe dimensions, fluid properties, target maintain temp, ambient min temp, and insulation thickness.</p>
+          </div>
+          <div class="card-glass" style="padding: 2rem;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: rgba(255, 87, 34, 0.4); line-height: 1; margin-bottom: 0.75rem;">02</div>
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 0.6rem;">Thermal Loss Calculation</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Calculating heat loss per meter (W/m) and total electrical power required.</p>
+          </div>
+          <div class="card-glass" style="padding: 2rem;">
+            <div style="font-size: 2.2rem; font-weight: 800; color: rgba(255, 87, 34, 0.4); line-height: 1; margin-bottom: 0.75rem;">03</div>
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 0.6rem;">Technology & Cable Selection</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Selecting optimal technology (SLSR, CWSR, CTL) matching hazardous Ex ratings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client References Section -->
+    <section id="references" class="section" style="background: #090d16;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="award" style="width: 16px; height: 16px;"></i> Proven Track Record
+          </div>
+          <h2 class="section-heading">Major Industrial <span>Project References</span></h2>
+          <p class="section-subtext">Over 5,000+ heat tracing systems completed for global leaders.</p>
+        </div>
+
+        <div class="card-glass" style="overflow: hidden;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+            <thead>
+              <tr style="background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border-subtle); color: var(--primary-orange-light);">
+                <th style="padding: 1rem 1.5rem;">Client Organization</th>
+                <th style="padding: 1rem 1.5rem;">Project Location</th>
+                <th style="padding: 1rem 1.5rem;">Country</th>
+                <th style="padding: 1rem 1.5rem;">Scope of Supply</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% (data.clientReferences || []).forEach(ref => { %>
+                <tr style="border-bottom: 1px solid var(--border-subtle);">
+                  <td style="padding: 1rem 1.5rem; color: #fff; font-weight: 600;"><%= ref.client %></td>
+                  <td style="padding: 1rem 1.5rem; color: var(--text-muted);"><%= ref.project %></td>
+                  <td style="padding: 1rem 1.5rem; color: #e2e8f0; font-weight: 500;"><%= ref.country %></td>
+                  <td style="padding: 1rem 1.5rem; color: var(--text-muted);"><%= ref.scope %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & RFQ Form -->
+    <section id="contact" class="section" style="background: #0b101d;">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="badge-tag">
+            <i data-lucide="mail" style="width: 16px; height: 16px;"></i> Technical Assistance
+          </div>
+          <h2 class="section-heading">Request a <span>Custom Technical Quote</span></h2>
+          <p class="section-subtext">Submit your technical specifications directly to our engineering panel.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem;" class="contact-grid">
+          <div class="card-glass" style="padding: 2.5rem; border: 1px solid var(--border-bright);">
+            <h3 style="color: #fff; font-size: 1.4rem; margin-bottom: 1.5rem;">Factory & Head Office</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;"><%= data.companyDetails.contact.address %></p>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem;"><strong>Phones:</strong> <%= data.companyDetails.contact.phones.join(' | ') %></p>
+            <p style="color: var(--primary-orange-light); font-size: 0.95rem;"><strong>Email:</strong> <%= data.companyDetails.contact.email %></p>
+          </div>
+
+          <div class="card-glass" style="padding: 2.5rem;">
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 1.5rem;">Submit Technical Inquiry</h3>
+            <form onsubmit="handleContactSubmit(event)">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="contact_name" required placeholder="Full Name" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                <input type="text" id="contact_company" required placeholder="Company Name" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <input type="email" id="contact_email" required placeholder="Work Email" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+                <input type="tel" id="contact_phone" required placeholder="Phone / WhatsApp" style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px;">
+              </div>
+              <textarea id="contact_msg" rows="4" placeholder="Specification details..." style="width: 100%; padding: 0.7rem; background: rgba(9,13,22,0.8); border: 1px solid var(--border-subtle); color: #fff; border-radius: 6px; margin-bottom: 1.5rem;"></textarea>
+              <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry RFQ →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: #05080f; border-top: 1px solid var(--border-subtle); color: var(--text-muted); padding: 3rem 0; font-size: 0.875rem;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        © <%= new Date().getFullYear() %> <%= data.companyDetails.name %>. All Rights Reserved. ISO 9001:2015 Registered.
+      </div>
+      <div>
+        <a href="/admin/login" style="color: var(--primary-orange-light); font-weight: 600;">🔒 Admin Panel Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    async function runCalculation() {
+      const payload = {
+        pipeDiameter: document.getElementById('calc_pipeDiameter').value,
+        insulationThickness: document.getElementById('calc_insulationThickness').value,
+        maintainTemp: document.getElementById('calc_maintainTemp').value,
+        ambientTemp: document.getElementById('calc_ambientTemp').value,
+        pipeLength: 30,
+        insulationType: 'glasswool'
+      };
+
+      try {
+        const res = await fetch('/api/calculate-heat-loss', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        document.getElementById('res_qPerMeter').innerHTML = data.qPerMeter + ' <span style="font-size: 1.2rem; color: var(--text-muted);">W/m</span>';
+        document.getElementById('res_recommendedCable').innerText = data.recommendedCable;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function runRoiCalc() {
+      const machines = parseFloat(document.getElementById('roi_machines').value) || 1;
+      const kw = parseFloat(document.getElementById('roi_kw').value) || 10;
+      const hrs = parseFloat(document.getElementById('roi_hrs').value) || 12;
+      const tariff = parseFloat(document.getElementById('roi_tariff').value) || 10;
+
+      const dailyKwh = machines * kw * hrs * 0.35;
+      const monthlyKwh = Math.round(dailyKwh * 30);
+      const annualSavings = Math.round(monthlyKwh * 12 * tariff);
+
+      document.getElementById('res_roiSavings').innerText = '₹' + annualSavings.toLocaleString();
+      document.getElementById('res_roiKwh').innerText = monthlyKwh.toLocaleString() + ' kWh';
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact_name').value;
+      const company = document.getElementById('contact_company').value;
+      const msg = document.getElementById('contact_msg').value;
+      
+      const text = encodeURIComponent(`*TechnoTherm Inquiry*\nName: ${name}\nCompany: ${company}\nMessage: ${msg}`);
+      window.open(`https://wa.me/<%= data.companyDetails.contact.whatsapp %>?text=${text}`, '_blank');
+    }
+  </script>
+</body>
+</html>
