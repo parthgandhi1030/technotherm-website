@@ -477,23 +477,37 @@
 
         <!-- Chairman Message -->
         <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.9) 0%, rgba(13,20,35,0.95) 100%); border: 1px solid rgba(255,87,34,0.3);">
-          <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;">
+          <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;" class="chairman-grid">
             <div style="text-align: center;">
-              <div style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9800 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2.2rem; font-weight: 800; margin: 0 auto 1rem auto; box-shadow: 0 8px 24px rgba(255,87,34,0.4);">
+              <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9800 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2.5rem; font-weight: 800; margin: 0 auto 1rem auto; box-shadow: 0 8px 24px rgba(255,87,34,0.4);">
                 RG
               </div>
               <h4 style="color: #fff; font-size: 1.2rem; margin: 0;"><%= data.companyDetails.chairman.name %></h4>
               <div style="color: var(--primary-orange-light); font-size: 0.875rem; font-weight: 600;"><%= data.companyDetails.chairman.title %></div>
+              <div style="font-size: 0.8rem; color: var(--text-dim);">TechnoTherm Industries LLP</div>
             </div>
 
             <div>
-              <div style="color: var(--primary-orange); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 0.75rem;">Chairman's Address</div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary-orange); margin-bottom: 0.75rem;">
+                <i data-lucide="quote" style="width: 24px; height: 24px;"></i>
+                <span style="font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">Chairman's Address</span>
+              </div>
+
               <blockquote style="font-size: 1.1rem; font-style: italic; color: #f1f5f9; line-height: 1.6; margin-bottom: 1.25rem;">
                 "<%= data.companyDetails.chairman.quote %>"
               </blockquote>
-              <div style="color: var(--text-muted); white-space: pre-line; line-height: 1.7; font-size: 0.975rem;">
+
+              <div id="chairmanShortMsg" style="color: var(--text-muted); line-height: 1.7; font-size: 0.975rem;">
+                <p><%= (data.companyDetails.chairman.message || '').substring(0, 320) %>...</p>
+              </div>
+
+              <div id="chairmanFullMsg" style="color: var(--text-muted); line-height: 1.7; font-size: 0.975rem; display: none; white-space: pre-line;">
                 <%= data.companyDetails.chairman.message %>
               </div>
+
+              <button type="button" id="chairmanToggleBtn" onclick="toggleChairmanMsg()" class="btn-outline-orange" style="margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                <span id="chairmanBtnText">Read Full Chairman Message</span> <i data-lucide="chevron-down" id="chairmanBtnIcon" style="width: 16px; height: 16px;"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -511,15 +525,55 @@
           <p class="section-subtext">Engineered for high thermal efficiency, extreme durability, and maximum safety compliance in demanding industrial environments.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;" class="products-grid">
+        <!-- Filter Controls Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; background: var(--bg-card); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          
+          <!-- Category Filter Tabs -->
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;" id="categoryFilterTabs">
+            <button type="button" onclick="filterCategory('All', this)" class="cat-filter-btn active" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: var(--primary-orange); color: #fff; border: none; cursor: pointer;">All</button>
+            <button type="button" onclick="filterCategory('Heating Cables', this)" class="cat-filter-btn" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); cursor: pointer;">Heating Cables</button>
+            <button type="button" onclick="filterCategory('Industrial Heaters', this)" class="cat-filter-btn" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); cursor: pointer;">Industrial Heaters</button>
+            <button type="button" onclick="filterCategory('Insulation Jackets', this)" class="cat-filter-btn" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); cursor: pointer;">Insulation Jackets</button>
+            <button type="button" onclick="filterCategory('Controls & Accessories', this)" class="cat-filter-btn" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); cursor: pointer;">Controls & Accessories</button>
+            <button type="button" onclick="filterCategory('Turnkey & Consultancy', this)" class="cat-filter-btn" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); cursor: pointer;">Turnkey & Consultancy</button>
+          </div>
+
+          <!-- Search Input -->
+          <div style="position: relative; min-width: 260px;">
+            <i data-lucide="search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-muted);"></i>
+            <input type="text" id="productSearchInput" oninput="handleProductSearch()" placeholder="Search products, specs..." style="width: 100%; padding: 0.55rem 0.75rem 0.55rem 2.25rem; border-radius: var(--radius-sm); background: rgba(9, 13, 22, 0.8); border: 1px solid var(--border-subtle); color: #fff; font-size: 0.875rem; outline: none;">
+          </div>
+        </div>
+
+        <!-- Sticky Floating Compare Bar -->
+        <div id="floatingCompareBar" style="display: none; position: sticky; top: 80px; z-index: 900; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary-orange) 0%, #d84315 100%); padding: 1rem 1.5rem; border-radius: var(--radius-md); justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(255,87,34,0.4); color: #fff;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; font-weight: 600;">
+            <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
+            <span id="compareBarText">0 Product(s) Selected for Side-by-Side Comparison</span>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button type="button" onclick="clearProductCompare()" style="background: rgba(0,0,0,0.2); color: #fff; padding: 0.4rem 0.85rem; border-radius: 4px; font-size: 0.825rem; border: none; cursor: pointer;">Clear All</button>
+            <button type="button" onclick="openCompareModal()" style="background: #fff; color: #000; font-weight: 700; padding: 0.4rem 1rem; border-radius: 4px; font-size: 0.85rem; border: none; cursor: pointer;">Compare Now Side-by-Side →</button>
+          </div>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;" class="products-grid" id="productGridContainer">
           <% (data.productCategories || []).forEach(product => { %>
-            <div class="card-glass" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
-              <!-- Frame normalization: images of any resolution/size automatically crop and fit cleanly -->
+            <div class="card-glass product-card-item" data-category="<%= product.category %>" data-title="<%= product.title.toLowerCase() %>" data-desc="<%= product.shortDesc.toLowerCase() %>" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
+              <!-- Image Frame -->
               <div style="position: relative; height: 220px; background: #000; overflow: hidden;">
                 <img src="<%= product.images[0] || '/assets/images/slsr_cable_1.jpg' %>" alt="<%= product.title %>" class="img-auto-fit">
+                
                 <div style="position: absolute; top: 12px; left: 12px; background: rgba(9, 13, 22, 0.85); backdrop-filter: blur(4px); padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; color: var(--primary-orange-light); border: 1px solid rgba(255,87,34,0.3);">
                   <%= product.badge || product.category %>
                 </div>
+
+                <!-- Compare Checkbox Badge -->
+                <button type="button" onclick="toggleCompareProduct('<%= product.id %>')" id="compare_btn_<%= product.id %>" style="position: absolute; top: 12px; right: 12px; background: rgba(9,13,22,0.85); color: #fff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 0.3rem; cursor: pointer;">
+                  <i data-lucide="check" style="width: 12px; height: 12px; color: transparent;" id="compare_icon_<%= product.id %>"></i>
+                  <span id="compare_text_<%= product.id %>">+ Compare</span>
+                </button>
               </div>
 
               <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
@@ -545,51 +599,78 @@
     <!-- Cable Explorer Section -->
     <section id="cable-explorer" class="section" style="background: #080c16;">
       <div class="container">
+        
         <div class="section-title-wrapper">
           <div class="badge-tag">
             <i data-lucide="layers" style="width: 16px; height: 16px;"></i> Interactive Engineering Visualizer
           </div>
           <h2 class="section-heading">Interactive Cable <span>Structure Explorer</span></h2>
-          <p class="section-subtext">Inspect the internal construction layers of TechnoTherm electric heating cables.</p>
+          <p class="section-subtext">Inspect the internal construction layers of TechnoTherm electric heating cables. Click any layer to examine its exact material specification and thermal function.</p>
         </div>
 
-        <div class="card-glass" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(19,27,46,0.98) 0%, rgba(10,15,26,0.99) 100%); border: 1px solid var(--border-bright);">
-          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center;" class="explorer-grid">
-            <div>
-              <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 1.5rem;">SLSR Self-Regulating Cable Cutaway Construction</h3>
-              
-              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <div style="padding: 1rem; background: rgba(255,87,34,0.15); border: 1px solid var(--primary-orange); border-radius: 8px; color: #fff;">
-                  <strong>1. Dual Tinned Copper Bus Wires (7 × 0.4mm)</strong>
-                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Continuous electrical power distribution along circuit length.</div>
-                </div>
+        <!-- Cable Type & Heat Glow Toggle Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; background: var(--bg-card); padding: 1rem 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="display: flex; gap: 0.75rem;">
+            <button type="button" id="cableTypeSLSR" onclick="switchCableType('SLSR')" class="btn-primary" style="padding: 0.6rem 1.25rem; font-size: 0.875rem;">
+              SLSR Self-Regulating Cable
+            </button>
+            <button type="button" id="cableTypeCWSR" onclick="switchCableType('CWSR')" class="btn-secondary" style="padding: 0.6rem 1.25rem; font-size: 0.875rem;">
+              CWSR Constant Wattage (Zone II)
+            </button>
+          </div>
 
-                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
-                  <strong>2. PTC Semi-Conductive Polymer Core</strong>
-                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Automatically adjusts resistance & heat output relative to surface temperature.</div>
-                </div>
+          <button type="button" id="heatGlowBtn" onclick="toggleHeatGlow()" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,87,34,0.2); border: 1px solid var(--primary-orange); color: var(--primary-orange-light); padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+            <i data-lucide="flame" style="width: 16px; height: 16px; color: var(--primary-orange);"></i>
+            Simulate Heat Glow: <span id="heatGlowStatus">ON</span>
+          </button>
+        </div>
 
-                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
-                  <strong>3. Primary Insulation (Polyolefin / PTFE)</strong>
-                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">High dielectric barrier protecting against electrical breakdown up to 230V AC.</div>
-                </div>
+        <!-- Visualizer Grid -->
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem; align-items: center;" class="explorer-grid">
+          
+          <!-- Left Column: Layer Stack Cutaway -->
+          <div class="card-glass" style="padding: 2.5rem; position: relative; background: linear-gradient(135deg, rgba(19,27,46,0.98) 0%, rgba(10,15,26,0.99) 100%); border: 1px solid var(--border-bright);">
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="zap" style="width: 20px; height: 20px; color: var(--primary-orange);"></i>
+              <span id="explorerSectionTitle">SLSR PTC Cross-Section Construction</span>
+            </h3>
 
-                <div style="padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
-                  <strong>4. Al-Mg Metallic Braid Shield</strong>
-                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">100% ground fault safety and high mechanical strength per IEEE/IS standards.</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="background: rgba(9,13,22,0.85); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-              <div style="color: var(--accent-blue); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Engineering Quality</div>
-              <h3 style="color: #fff; font-size: 1.4rem; margin: 0.5rem 0 1rem 0;">CSIR-CIMFR Zone II Approved</h3>
-              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                Our heat tracing cables undergo 100% high-voltage dielectric testing and insulation resistance validation prior to dispatch.
-              </p>
+            <!-- Cutaway Layer Stack Container -->
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="cableLayersStack">
+              <!-- Rendered via JS dynamically -->
             </div>
           </div>
+
+          <!-- Right Column: Layer Spec Card -->
+          <div class="card-glass" style="padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); height: 100%; display: flex; flex-direction: column; justify-content: center;" id="layerSpecDetailCard">
+            <div class="badge-tag" style="background: rgba(59,130,246,0.12); color: var(--accent-blue); border-color: rgba(59,130,246,0.3); align-self: flex-start;">
+              <i data-lucide="info" style="width: 14px; height: 14px;"></i> Layer Specification
+            </div>
+
+            <h3 style="color: #fff; font-size: 1.5rem; margin: 0.5rem 0 0.25rem 0;" id="specLayerName">
+              1. Bus Conductors
+            </h3>
+
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--primary-orange-light); margin-bottom: 1.25rem;" id="specLayerMaterial">
+              Material: Dual Tinned Copper Wires (7 × 0.4 mm)
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 2rem;" id="specLayerDesc">
+              Delivers continuous electrical power along the entire circuit length with high electrical conductivity and corrosion resistance.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #e2e8f0;">
+                <i data-lucide="check-circle-2" style="width: 16px; height: 16px; color: var(--accent-green);"></i> Engineered for continuous industrial thermal duty
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #e2e8f0;">
+                <i data-lucide="check-circle-2" style="width: 16px; height: 16px; color: var(--accent-green);"></i> 100% Factory Voltage & Insulation Resistance Tested
+              </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
 
@@ -1092,6 +1173,289 @@
 
     const productsData = <%- JSON.stringify(data.productCategories || []) %>;
 
+    // ================= 1. CHAIRMAN ADDRESS READ MORE TOGGLE =================
+    let chairmanExpanded = false;
+    function toggleChairmanMsg() {
+      chairmanExpanded = !chairmanExpanded;
+      const shortEl = document.getElementById('chairmanShortMsg');
+      const fullEl = document.getElementById('chairmanFullMsg');
+      const btnText = document.getElementById('chairmanBtnText');
+      const btnIcon = document.getElementById('chairmanBtnIcon');
+
+      if (chairmanExpanded) {
+        shortEl.style.display = 'none';
+        fullEl.style.display = 'block';
+        btnText.innerText = 'Read Less';
+        btnIcon.setAttribute('data-lucide', 'chevron-up');
+      } else {
+        shortEl.style.display = 'block';
+        fullEl.style.display = 'none';
+        btnText.innerText = 'Read Full Chairman Message';
+        btnIcon.setAttribute('data-lucide', 'chevron-down');
+      }
+      lucide.createIcons();
+    }
+
+    // ================= 2. PRODUCT CATEGORY FILTERS & SEARCH =================
+    let activeCategory = 'All';
+    function filterCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.cat-filter-btn').forEach(b => {
+        b.style.background = 'rgba(255,255,255,0.05)';
+        b.style.color = 'var(--text-muted)';
+        b.style.border = '1px solid var(--border-subtle)';
+      });
+      btn.style.background = 'var(--primary-orange)';
+      btn.style.color = '#fff';
+      btn.style.border = 'none';
+
+      applyProductFilters();
+    }
+
+    function handleProductSearch() {
+      applyProductFilters();
+    }
+
+    function applyProductFilters() {
+      const query = document.getElementById('productSearchInput').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.product-card-item');
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        const itemTitle = item.getAttribute('data-title');
+        const itemDesc = item.getAttribute('data-desc');
+
+        const matchesCat = (activeCategory === 'All' || itemCat === activeCategory);
+        const matchesQuery = (!query || itemTitle.includes(query) || itemDesc.includes(query));
+
+        if (matchesCat && matchesQuery) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // ================= 3. PRODUCT COMPARE FUNCTIONALITY =================
+    let selectedCompareIds = [];
+
+    function toggleCompareProduct(productId) {
+      const idx = selectedCompareIds.indexOf(productId);
+      const btn = document.getElementById('compare_btn_' + productId);
+      const icon = document.getElementById('compare_icon_' + productId);
+      const text = document.getElementById('compare_text_' + productId);
+
+      if (idx > -1) {
+        selectedCompareIds.splice(idx, 1);
+        btn.style.background = 'rgba(9,13,22,0.85)';
+        icon.style.color = 'transparent';
+        text.innerText = '+ Compare';
+      } else {
+        selectedCompareIds.push(productId);
+        btn.style.background = 'var(--primary-orange)';
+        icon.style.color = '#fff';
+        text.innerText = 'Compared';
+      }
+
+      updateCompareBar();
+    }
+
+    function updateCompareBar() {
+      const bar = document.getElementById('floatingCompareBar');
+      const barText = document.getElementById('compareBarText');
+      if (selectedCompareIds.length > 0) {
+        bar.style.display = 'flex';
+        barText.innerText = selectedCompareIds.length + ' Product(s) Selected for Side-by-Side Comparison';
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+
+    function clearProductCompare() {
+      selectedCompareIds.forEach(id => {
+        const btn = document.getElementById('compare_btn_' + id);
+        const icon = document.getElementById('compare_icon_' + id);
+        const text = document.getElementById('compare_text_' + id);
+        if (btn) {
+          btn.style.background = 'rgba(9,13,22,0.85)';
+          icon.style.color = 'transparent';
+          text.innerText = '+ Compare';
+        }
+      });
+      selectedCompareIds = [];
+      updateCompareBar();
+    }
+
+    function openCompareModal() {
+      const compareProducts = productsData.filter(p => selectedCompareIds.includes(p.id));
+      if (compareProducts.length === 0) return;
+
+      const content = `
+        <div style="margin-bottom: 1.5rem;">
+          <span class="badge-tag"><i data-lucide="zap" style="width: 14px; height: 14px;"></i> Side-by-Side Comparison</span>
+          <h2 style="font-size: 1.8rem; color: #fff; margin-top: 0.25rem;">Product Technical Comparison Matrix</h2>
+        </div>
+
+        <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-subtle);">
+                <th style="padding: 1rem; width: 22%; color: var(--text-muted); text-align: left;">Technical Spec</th>
+                ${compareProducts.map(prod => `
+                  <th style="padding: 1rem; text-align: center;">
+                    <div style="width: 80px; height: 60px; margin: 0 auto 0.5rem auto; border-radius: 6px; overflow: hidden;">
+                      <img src="${prod.images[0]}" alt="${prod.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="color: #fff; font-size: 1rem; font-weight: 700;">${prod.title}</div>
+                    <div style="font-size: 0.75rem; color: var(--primary-orange-light); margin-top: 0.25rem;">${prod.badge || ''}</div>
+                  </th>
+                `).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 1rem; color: var(--text-muted); font-weight: 600;">Category</td>
+                ${compareProducts.map(p => `<td style="padding: 0.85rem 1rem; text-align: center; color: #fff;">${p.category}</td>`).join('')}
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 1rem; color: var(--text-muted); font-weight: 600;">Heat Output Behavior</td>
+                ${compareProducts.map(p => `<td style="padding: 0.85rem 1rem; text-align: center; color: #cbd5e1;">${p.id.includes('slsr') ? 'Automatically varies with ambient temp' : 'Constant / fixed output per meter'}</td>`).join('')}
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 1rem; color: var(--text-muted); font-weight: 600;">Overheating Protection</td>
+                ${compareProducts.map(p => `<td style="padding: 0.85rem 1rem; text-align: center; color: #cbd5e1;">${p.id.includes('slsr') ? 'Intrinsic self-regulating polymer core' : 'Requires control thermostat / PID panel'}</td>`).join('')}
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 1rem; color: var(--text-muted); font-weight: 600;">Short Summary</td>
+                ${compareProducts.map(p => `<td style="padding: 0.85rem 1rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">${p.shortDesc}</td>`).join('')}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; padding-top: 1rem;">
+          <button onclick="closeProductModal()" class="btn-secondary">Close Comparison</button>
+        </div>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('productModal').style.display = 'flex';
+      lucide.createIcons();
+    }
+
+    // ================= 4. CABLE STRUCTURE EXPLORER INTERACTION =================
+    const slsrLayers = [
+      { name: "1. Bus Conductors", material: "Dual Tinned Copper Wires (7 × 0.4 mm)", desc: "Delivers continuous electrical power along the entire circuit length with high electrical conductivity and corrosion resistance.", color: "#f59e0b" },
+      { name: "2. PTC Semi-Conductive Core", material: "PTC Carbon Matrix Polymer", desc: "The heart of Self-Regulating technology. Semi-conductive polymer matrix automatically increases resistance when hot and decreases resistance when cold.", color: "#ef4444" },
+      { name: "3. Primary Insulation", material: "Polyolefin / Fluoropolymer (PTFE)", desc: "High dielectric strength insulation layer protecting against moisture, thermal stress, and voltage breakdown up to 220V/230V AC.", color: "#3b82f6" },
+      { name: "4. Metallic Shield Braid", material: "Aluminium-Magnesium Alloy Braid", desc: "Provides 100% ground fault safety protection, mechanical impact resistance, and electromagnetic shielding as required by IS/IEC standards.", color: "#94a3b8" },
+      { name: "5. Outer Protective Jacket", material: "UV-Resistant Polyolefin / FEP", desc: "Heavy-duty outer sheath protecting against harsh industrial chemicals, weather exposure, UV radiation, and mechanical abrasion.", color: "#1e293b" }
+    ];
+
+    const cwsrLayers = [
+      { name: "1. Resistance Heating Element", material: "Nichrome / PTFE Teflon Coated Series Wire", desc: "Delivers constant, non-varying wattage per meter (25W/m or 45W/m) regardless of temperature changes.", color: "#f97316" },
+      { name: "2. Primary Insulation", material: "P.T.F.E. (Teflon) High-Temp Matrix", desc: "Continuous high-temperature insulation rated for non-energized exposure up to 200°C.", color: "#60a5fa" },
+      { name: "3. Secondary Insulation", material: "High-Purity Glass-Fibre Braid", desc: "Secondary thermal barrier providing extreme mechanical stability under continuous heat load.", color: "#e2e8f0" },
+      { name: "4. Protective Metallic Sheathing", material: "SS 304 Stainless Steel Sheath Braid", desc: "Robust stainless steel outer casing certified for Zone II explosive gas environments (CSIR-CIMFR Approved).", color: "#cbd5e1" }
+    ];
+
+    let activeCableType = 'SLSR';
+    let selectedLayerIndex = 0;
+    let heatGlowActive = true;
+
+    function renderCableLayers() {
+      const layers = activeCableType === 'SLSR' ? slsrLayers : cwsrLayers;
+      const stackEl = document.getElementById('cableLayersStack');
+      if (!stackEl) return;
+
+      const titleEl = document.getElementById('explorerSectionTitle');
+      if (titleEl) {
+        titleEl.innerText = activeCableType === 'SLSR' ? 'SLSR PTC Cross-Section Construction' : 'CWSR Series Tracer Cross-Section';
+      }
+
+      stackEl.innerHTML = layers.map((layer, idx) => {
+        const isSelected = idx === selectedLayerIndex;
+        const bg = isSelected ? 'rgba(255,87,34,0.15)' : 'rgba(255,255,255,0.03)';
+        const border = isSelected ? '2px solid var(--primary-orange)' : '1px solid var(--border-subtle)';
+        const glow = (isSelected && heatGlowActive) ? `box-shadow: 0 0 20px rgba(255,87,34,0.4);` : '';
+
+        return `
+          <div 
+            onclick="selectCableLayer(${idx})" 
+            style="padding: 1rem 1.25rem; border-radius: var(--radius-sm); background: ${bg}; border: ${border}; cursor: pointer; transition: all 0.2s; ${glow} display: flex; align-items: center; justify-content: space-between;"
+          >
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 16px; height: 16px; border-radius: 50%; background: ${layer.color}; boxShadow: ${heatGlowActive ? `0 0 10px ${layer.color}` : 'none'};"></div>
+              <div>
+                <div style="color: ${isSelected ? '#fff' : 'var(--text-main)'}; font-weight: 700; font-size: 0.95rem;">
+                  ${layer.name}
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  ${layer.material}
+                </div>
+              </div>
+            </div>
+            ${isSelected ? '<div style="color: var(--primary-orange-light); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Selected</div>' : ''}
+          </div>
+        `;
+      }).join('');
+
+      // Update Right Detail Card
+      const currentLayer = layers[selectedLayerIndex] || layers[0];
+      document.getElementById('specLayerName').innerText = currentLayer.name;
+      document.getElementById('specLayerMaterial').innerText = 'Material: ' + currentLayer.material;
+      document.getElementById('specLayerDesc').innerText = currentLayer.desc;
+    }
+
+    function selectCableLayer(idx) {
+      selectedLayerIndex = idx;
+      renderCableLayers();
+    }
+
+    function switchCableType(type) {
+      activeCableType = type;
+      selectedLayerIndex = 0;
+      
+      const btnSLSR = document.getElementById('cableTypeSLSR');
+      const btnCWSR = document.getElementById('cableTypeCWSR');
+
+      if (type === 'SLSR') {
+        btnSLSR.className = 'btn-primary';
+        btnCWSR.className = 'btn-secondary';
+      } else {
+        btnSLSR.className = 'btn-secondary';
+        btnCWSR.className = 'btn-primary';
+      }
+
+      renderCableLayers();
+    }
+
+    function toggleHeatGlow() {
+      heatGlowActive = !heatGlowActive;
+      const statusEl = document.getElementById('heatGlowStatus');
+      const btn = document.getElementById('heatGlowBtn');
+
+      if (heatGlowActive) {
+        statusEl.innerText = 'ON';
+        btn.style.background = 'rgba(255,87,34,0.2)';
+        btn.style.borderColor = 'var(--primary-orange)';
+        btn.style.color = 'var(--primary-orange-light)';
+      } else {
+        statusEl.innerText = 'OFF';
+        btn.style.background = 'rgba(255,255,255,0.05)';
+        btn.style.borderColor = 'var(--border-subtle)';
+        btn.style.color = 'var(--text-muted)';
+      }
+
+      renderCableLayers();
+    }
+
+    // Initialize Cable Explorer cutaway stack on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCableLayers();
+    });
+
+    // ================= 5. PRODUCT TECH SHEET MODAL & CALCULATOR FUNCTIONS =================
     function openProductModal(productId) {
       const product = productsData.find(p => p.id === productId);
       if (!product) return;
