@@ -9,18 +9,34 @@ const PORT = process.env.PORT || 3000;
 
 // Path to site data JSON
 const DATA_FILE = path.join(__dirname, 'data', 'siteData.json');
-const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
+const UPLOADS_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'uploads')
+  : path.join(__dirname, 'public', 'uploads');
 
 // Ensure uploads directory exists
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('Could not create UPLOADS_DIR:', e.message);
 }
 
 // Helpers for data reading and writing
+let inMemoryData = null;
+
 function getSiteData() {
+  if (inMemoryData) return inMemoryData;
   try {
+    const tmpFile = path.join('/tmp', 'siteData.json');
+    if (fs.existsSync(tmpFile)) {
+      const raw = fs.readFileSync(tmpFile, 'utf-8');
+      inMemoryData = JSON.parse(raw);
+      return inMemoryData;
+    }
     const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-    return JSON.parse(raw);
+    inMemoryData = JSON.parse(raw);
+    return inMemoryData;
   } catch (e) {
     console.error('Error reading siteData.json:', e);
     return {};
@@ -28,13 +44,18 @@ function getSiteData() {
 }
 
 function saveSiteData(data) {
+  inMemoryData = data;
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
-    return true;
   } catch (e) {
-    console.error('Error writing siteData.json:', e);
-    return false;
+    try {
+      const tmpFile = path.join('/tmp', 'siteData.json');
+      fs.writeFileSync(tmpFile, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (e2) {
+      console.error('Error saving siteData:', e2);
+    }
   }
+  return true;
 }
 
 // Setup Multer Storage for Uploaded Product Images
@@ -262,7 +283,11 @@ app.post('/admin/company-info', requireAdmin, (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`TechnoTherm Express EJS server running on http://localhost:${PORT}`);
-  console.log(`Admin Panel accessible at http://localhost:${PORT}/admin`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`TechnoTherm Express EJS server running on http://localhost:${PORT}`);
+    console.log(`Admin Panel accessible at http://localhost:${PORT}/admin`);
+  });
+}
+
+module.exports = app;
