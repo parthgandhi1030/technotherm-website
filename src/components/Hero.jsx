@@ -29,7 +29,7 @@ export default function Hero({ onOpenRfq }) {
           {/* Left Column Text Content */}
           <div>
             <div className="badge-tag">
-              <ShieldCheck size={16} /> ISO 9001:2015 & CSIR-CIMFR Certified Manufacturer
+              <ShieldCheck size={16} /> ISO 9001 | CE | RoHS | UKCA | REACH | CSIR-CIMFR Certified
             </div>
 
             <h1 style={{

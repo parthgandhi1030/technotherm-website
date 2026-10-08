@@ -57,9 +57,16 @@ export default function Chatbot({ onOpenRfq, onScrollToSection }) {
       };
     }
 
+    if (q.includes('cert') || q.includes('iso') || q.includes('ce') || q.includes('rohs') || q.includes('ukca') || q.includes('reach')) {
+      return {
+        text: "🏆 **TechnoTherm Certifications & Global Compliance**:\n• **ISO 9001:2015**: Quality Management System (Cert #305026090972Q)\n• **CE Compliance**: Low Voltage 2014/35/EU & EMC 2014/30/EU (Cert #QM/26/09AP/PCCE)\n• **RoHS Compliance**: Directive 2015/863 (Cert #QM/26/09AQ/PCRO)\n• **UKCA Compliance**: UK Construction Products Reg (Cert #2026090917)\n• **REACH Compliance**: SVHC EC 1907/2006 (Cert #2026090916)\n• **CSIR-CIMFR Approved**: Zone II Area Gas T1 to T5 (Approval #TSP/0256/24-25)",
+        actionBtn: { label: 'Inspect Official Certificates', section: 'certifications' }
+      };
+    }
+
     if (q.includes('contact') || q.includes('phone') || q.includes('email') || q.includes('address') || q.includes('quote') || q.includes('rfq')) {
       return {
-        text: `📞 **Contact TechnoTherm Industries LLP**:\n• Phone: ${companyDetails.contact.phones.join(' | ')}\n• Email: ${companyDetails.contact.email}\n• Factory: 129 Vora Industrial Estate No 04, Vasai (East), Palghar - 401 210.`,
+        text: `📞 **Contact TechnoTherm Industries LLP**:\n• Phone: ${companyDetails.contact.phones.join(' | ')}\n• Email: ${companyDetails.contact.email}\n• Address: ${companyDetails.contact.address}`,
         actionBtn: { label: 'Request Factory Quote', rfq: true }
       };
     }

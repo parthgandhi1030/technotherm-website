@@ -21,6 +21,7 @@ export default function Header({ onOpenRfq }) {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'About Us', href: '#about' },
+    { name: 'Certifications', href: '#certifications' },
     { name: 'Products', href: '#products' },
     { name: 'Cable Explorer', href: '#cable-explorer' },
     { name: 'Heat Calculator', href: '#calculator' },
@@ -37,7 +38,7 @@ export default function Header({ onOpenRfq }) {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <ShieldCheck size={14} color="var(--primary-orange)" /> ISO 9001:2015 & CIMFR Certified
+              <ShieldCheck size={14} color="var(--primary-orange)" /> ISO 9001, CE, RoHS, UKCA & REACH Certified
             </span>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <MapPin size={14} color="var(--accent-blue)" /> Vasai (E), Palghar, Maharashtra (India)

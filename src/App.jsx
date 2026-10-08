@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Certifications from './components/Certifications';
 import ProductCatalog from './components/ProductCatalog';
 import ProductModal from './components/ProductModal';
 import CableExplorer from './components/CableExplorer';
@@ -54,6 +55,7 @@ export default function App() {
       <main>
         <Hero onOpenRfq={handleOpenRfq} />
         <About />
+        <Certifications />
         <ProductCatalog 
           onSelectProduct={(product) => setSelectedProduct(product)}
           onOpenRfq={handleOpenRfq}

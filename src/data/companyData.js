@@ -8,9 +8,86 @@ export const companyDetails = {
   mission: "To exceed our customers' expectations in quality, delivery and cost through continuous improvement and customer interaction.",
   coreValue: "To maintain a healthy, viable company & workplace positioned to serve our Customers, Employees and Community.",
   certifications: [
-    { title: "ISO 9001:2015 Certified", desc: "Quality Management System Certified Organization" },
-    { title: "CSIR-CIMFR Approved", desc: "Zone II Area Certified (T1 to T5 Gas Classification)" },
-    { title: "IS/IEC/IEEE Standard", desc: "Manufactured per IS/IEC/IEEE6079-30 : 2015 Standards" }
+    { title: "ISO 9001:2015 Certified", desc: "Quality Management System (QRO / IAF / EGAC)" },
+    { title: "CE Compliant", desc: "Low Voltage 2014/35/EU & EMC 2014/30/EU Directives" },
+    { title: "RoHS Compliant", desc: "Hazardous Substances Restriction Directive 2015/863" },
+    { title: "UKCA Certified", desc: "UK Construction Products Regulations 305/2011" },
+    { title: "REACH Compliant", desc: "Chemical Safety Standard SVHC EC 1907/2006" },
+    { title: "CSIR-CIMFR Approved", desc: "Zone II Area Certified (T1 to T5 Gas Classification)" }
+  ],
+  certificationsList: [
+    {
+      id: "iso9001",
+      title: "ISO 9001:2015",
+      subtitle: "Quality Management System",
+      certNo: "305026090972Q",
+      issuingBody: "QRO (Quality Research Organization) / IAF & EGAC Accredited",
+      issueDate: "09/09/2026",
+      expiryDate: "08/09/2029",
+      scope: "MANUFACTURING SELF-REGULATING HEATING CABLE (SLSR), CONSTANT WATTAGE HEATING CABLE (CWSR) & HEATING MAT",
+      image: "/assets/certificates/cert_iso9001.jpg",
+      badge: "Quality Management"
+    },
+    {
+      id: "ce",
+      title: "CE Compliance",
+      subtitle: "Low Voltage & EMC Directives",
+      certNo: "QM/26/09AP/PCCE",
+      issuingBody: "QM Certification & Assessment Ltd (London, UK)",
+      issueDate: "09/09/2026",
+      expiryDate: "08/09/2029",
+      scope: "Low Voltage Directive (2014/35/EU) & Electromagnetic Compatibility (EMC) Directive (2014/30/EU)",
+      image: "/assets/certificates/cert_ce.jpg",
+      badge: "European Union Standard"
+    },
+    {
+      id: "rohs",
+      title: "RoHS Compliance",
+      subtitle: "Directive 2015/863",
+      certNo: "QM/26/09AQ/PCRO",
+      issuingBody: "QM Certification & Assessment Ltd (London, UK)",
+      issueDate: "09/09/2026",
+      expiryDate: "08/09/2029",
+      scope: "RoHS Directive 2015/863 Restriction of Hazardous Substances in Electrical & Electronic Equipment",
+      image: "/assets/certificates/cert_rohs.jpg",
+      badge: "Eco & Safety Standard"
+    },
+    {
+      id: "ukca",
+      title: "UKCA Compliance",
+      subtitle: "Construction Products Regulations",
+      certNo: "2026090917",
+      issuingBody: "Eurocert Inspection Limited (Cardiff, UK)",
+      issueDate: "09/09/2026",
+      expiryDate: "08/09/2029",
+      scope: "Council Directive on Construction Products Regulations (Regulation (EU) 305/2011 as brought into UK law)",
+      image: "/assets/certificates/cert_ukca.jpg",
+      badge: "United Kingdom Standard"
+    },
+    {
+      id: "reach",
+      title: "REACH Compliance",
+      subtitle: "SVHC Regulation EC 1907/2006",
+      certNo: "2026090916",
+      issuingBody: "Eurocert Inspection Limited (Cardiff, UK)",
+      issueDate: "09/09/2026",
+      expiryDate: "08/09/2029",
+      scope: "Registration, Evaluation and Authorization of Chemical Substances (SVHC EC 1907/2006)",
+      image: "/assets/certificates/cert_reach.jpg",
+      badge: "Chemical Safety Standard"
+    },
+    {
+      id: "cimfr",
+      title: "CSIR-CIMFR Approved",
+      subtitle: "Zone II Area Certification",
+      certNo: "TSP/0256/24-25",
+      issuingBody: "CSIR-Central Institute of Mining and Fuel Research (Govt. of India)",
+      issueDate: "09/09/2026",
+      expiryDate: "Continuous Surveillance",
+      scope: "Zone II Hazardous Area Gas Classification T1 to T5 per IS 5571:1979 & IS/IEC/IEEE6079-30",
+      image: null,
+      badge: "Hazardous Ex-d Rating"
+    }
   ],
   chairman: {
     name: "Ramesh Gandhi",
@@ -26,7 +103,7 @@ I firmly believe that sustainable business success cannot be achieved through sh
 Our vision is to continuously strengthen and expand our business by investing in the right people, infrastructure, technology, and processes, thereby creating a financially strong, professionally managed, and future-ready organization. We offer a wide range of solutions and services designed to meet the requirements of small, medium, and large organizations, whether established businesses or new ventures.`
   },
   contact: {
-    address: "129 Vora Industrial Estate No 04, Navghar, Vasai (East), Dist. Palghar - 401 210. Maharashtra (INDIA)",
+    address: "1st, Unit No 103, Building No 2, Yamini Industrial Estate, Gokhivare Road, Bhoida Pada, Vasai East, Vasai Virar, Palghar, Maharashtra, 401208, India",
     phones: ["+91 99209 70209", "+91 70661 10066"],
     whatsapp: "919920970209",
     email: "thermojacket@yahoo.com",
@@ -40,7 +117,7 @@ Our vision is to continuously strengthen and expand our business by investing in
   stats: [
     { value: "53+", label: "Years Group Legacy", desc: "Est. 1971" },
     { value: "5,000+", label: "Projects Completed", desc: "Worldwide" },
-    { value: "15+", label: "Product Lines", desc: "Custom & Standard" },
+    { value: "6+", label: "Global Certifications", desc: "ISO, CE, RoHS, UKCA, REACH, CIMFR" },
     { value: "12+", label: "Export Destinations", desc: "Global Footprint" }
   ]
 };

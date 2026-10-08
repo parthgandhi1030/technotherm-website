@@ -107,6 +107,12 @@ app.get('/', (req, res) => {
   res.render('index', { data });
 });
 
+// Public Company Info Page
+app.get('/company', (req, res) => {
+  const data = getSiteData();
+  res.render('company', { company: data.companyDetails || {} });
+});
+
 // Calculate Heat Loss API (Live formula calculation using admin settings)
 app.post('/api/calculate-heat-loss', (req, res) => {
   const data = getSiteData();

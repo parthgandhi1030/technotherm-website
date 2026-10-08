@@ -34,11 +34,11 @@ export default function Footer() {
             </div>
 
             <p style={{ fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-              TechnoTherm Industries LLP is a proud group company of Thermo-Tech Industries (est. 1971). ISO 9001:2015 certified manufacturer of industrial heating cables, energy saving jackets, and thermal management systems.
+              TechnoTherm Industries LLP is a proud group company of Thermo-Tech Industries (est. 1971). ISO 9001:2015, CE, RoHS, UKCA, REACH & CIMFR certified manufacturer of industrial heating cables and thermal management systems.
             </p>
 
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,87,34,0.1)', padding: '0.4rem 0.85rem', borderRadius: 'var(--radius-full)', border: '1px solid rgba(255,87,34,0.25)', fontSize: '0.8rem', color: 'var(--primary-orange-light)', fontWeight: 600 }}>
-              <ShieldCheck size={14} /> CSIR-CIMFR Zone II Approved
+              <ShieldCheck size={14} /> ISO 9001 | CE | RoHS | UKCA | REACH
             </div>
           </div>
 
@@ -48,6 +48,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.9rem' }}>
               <li><a href="#hero" style={{ color: 'var(--text-muted)' }}>Home</a></li>
               <li><a href="#about" style={{ color: 'var(--text-muted)' }}>About Company</a></li>
+              <li><a href="#certifications" style={{ color: 'var(--text-muted)' }}>Certifications & Compliance</a></li>
               <li><a href="#products" style={{ color: 'var(--text-muted)' }}>Product Line</a></li>
               <li><a href="#calculator" style={{ color: 'var(--text-muted)' }}>Thermal Loss Calculator</a></li>
               <li><a href="#turnkey" style={{ color: 'var(--text-muted)' }}>Turnkey Engineering</a></li>
