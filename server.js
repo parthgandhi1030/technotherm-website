@@ -289,7 +289,7 @@ app.post('/admin/company-info', requireAdmin, (req, res) => {
 });
 
 // Start Server
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`TechnoTherm Express EJS server running on http://localhost:${PORT}`);
     console.log(`Admin Panel accessible at http://localhost:${PORT}/admin`);
