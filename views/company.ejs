@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= company.name || "TechnoTherm Industries LLP" %> | Company Profile & Leadership</title>
+  <meta name="description" content="Learn about TechnoTherm Industries LLP, our 50+ year legacy in industrial heat tracing solutions, vision, mission, and chairman's message.">
+  <link rel="canonical" href="https://teamthermotech.co.in/company">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1b2640;
+      --bg-glass: rgba(19, 27, 46, 0.85);
+      --primary-orange: #ff5722;
+      --primary-orange-light: #ff784b;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-bright: rgba(255, 87, 34, 0.4);
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--bg-glass); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle); padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #fff;
+      font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--primary-orange), #ff8a65);
+      color: #fff; padding: 0.35rem 0.65rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
+    }
+
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--primary-orange-light); }
+
+    .hero-banner {
+      padding: 4rem 2rem 3rem; text-align: center; max-width: 1000px; margin: 0 auto;
+    }
+    .hero-banner h1 {
+      font-family: var(--font-heading); font-size: 2.75rem; font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary-orange-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;
+    }
+    .hero-banner p { font-size: 1.15rem; color: var(--text-muted); max-width: 750px; margin: 0 auto; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 2rem; transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--border-bright); }
+
+    .card h3 {
+      font-family: var(--font-heading); font-size: 1.35rem; color: var(--primary-orange-light);
+      display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
+    }
+
+    .chairman-section {
+      background: linear-gradient(135deg, rgba(255,87,34,0.08) 0%, rgba(19,27,46,0.95) 100%);
+      border: 1px solid var(--border-bright); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3rem;
+    }
+
+    .chairman-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .chairman-avatar {
+      width: 64px; height: 64px; background: var(--primary-orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.5rem; color: #fff;
+    }
+
+    .quote-box {
+      font-style: italic; color: #e2e8f0; font-size: 1.1rem; border-left: 3px solid var(--primary-orange);
+      padding-left: 1rem; margin-bottom: 1.5rem;
+    }
+
+    .message-text { color: var(--text-muted); line-height: 1.7; white-space: pre-line; }
+
+    .stats-bar {
+      display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-around;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 3rem; text-align: center;
+    }
+    .stat-item .num { font-size: 2.25rem; font-weight: 800; color: var(--primary-orange-light); font-family: var(--font-heading); }
+    .stat-item .lbl { color: var(--text-dim); font-size: 0.9rem; text-transform: uppercase; tracking: 1px; }
+
+    footer {
+      border-top: 1px solid var(--border-subtle); padding: 2rem; text-align: center; color: var(--text-dim); font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">
+      <span class="logo-badge">TT</span>
+      <%= company.name || "TechnoTherm Industries LLP" %>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#products">Products</a></li>
+      <li><a href="/#calculator">Heat Loss Calculator</a></li>
+      <li><a href="/company" style="color: var(--primary-orange-light);">Company Profile</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </header>
+
+  <div class="hero-banner">
+    <h1><%= company.name %></h1>
+    <p>"<%= company.tagline || "The Stamp of Quality & Professionalism" %>"</p>
+  </div>
+
+  <div class="container">
+    
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="num"><%= company.establishedYear || 1971 %></div>
+        <div class="lbl">Established</div>
+      </div>
+      <div class="stat-item">
+        <div class="num"><%= company.legacyYears || 53 %>+ Years</div>
+        <div class="lbl">Industry Legacy</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">ISO 9001:2015</div>
+        <div class="lbl">Certified Quality</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">CIMFR Approved</div>
+        <div class="lbl">Zone II Certified</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3><i data-lucide="eye"></i> Our Vision</h3>
+        <p><%= company.vision %></p>
+      </div>
+      <div class="card">
+        <h3><i data-lucide="target"></i> Our Mission</h3>
+        <p><%= company.mission %></p>
+      </div>
+    </div>
+
+    <% if (company.chairman) { %>
+    <div class="chairman-section">
+      <div class="chairman-header">
+        <div class="chairman-avatar"><%= company.chairman.name ? company.chairman.name.charAt(0) : "R" %></div>
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem;"><%= company.chairman.name %></h2>
+          <p style="color: var(--text-dim);"><%= company.chairman.title %>, <%= company.chairman.company %></p>
+        </div>
+      </div>
+
+      <% if (company.chairman.quote) { %>
+      <div class="quote-box">
+        "<%= company.chairman.quote %>"
+      </div>
+      <% } %>
+
+      <div class="message-text">
+        <%= company.chairman.message %>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="card" style="margin-bottom: 3rem;">
+      <h3><i data-lucide="map-pin"></i> Head Office & Contact</h3>
+      <% if (company.contact) { %>
+      <p style="margin-bottom: 0.75rem;"><strong>Address:</strong> <%= company.contact.address %></p>
+      <p style="margin-bottom: 0.75rem;"><strong>Email:</strong> <a href="mailto:<%= company.contact.email %>" style="color: var(--primary-orange-light);"><%= company.contact.email %></a></p>
+      <p style="margin-bottom: 0.75rem;"><strong>Phones:</strong> <%= (company.contact.phones || []).join(' / ') %></p>
+      <p><strong>Working Hours:</strong> <%= company.contact.workingHours %></p>
+      <% } %>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; <%= new Date().getFullYear() %> <%= company.name || "TechnoTherm Industries LLP" %>. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
